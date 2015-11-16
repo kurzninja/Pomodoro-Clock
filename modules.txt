@@ -14,3 +14,7 @@ var interface :
 	listens for "tick" events to update visual ticker
 	listens for "counterchange" event to update visual clocks
 	emits "click" events from UI
+
+var eventTracker : 
+
+	pubsub implementation to keep track of events and listeners
