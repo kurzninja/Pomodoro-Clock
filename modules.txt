@@ -1,0 +1,16 @@
+var clock :
+	emits "tick" events using setInterval(1000)
+	listens for "timeup" events to stop time
+	listens for "click" events to stop timer
+
+var counters :
+	keep track of workTime, breakTime, timeLeft
+	emits "timeup" event
+	emits "counterchange" event
+	listens for "tick" events to update timeLeft
+
+var interface :
+	keeps track of interface elements and handles animations
+	listens for "tick" events to update visual ticker
+	listens for "counterchange" event to update visual clocks
+	emits "click" events from UI
