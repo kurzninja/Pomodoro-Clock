@@ -18,3 +18,7 @@ var interface :
 var eventTracker : 
 
 	pubsub implementation to keep track of events and listeners
+
+
+dependency:
+    Event Emitter (https://cdnjs.cloudflare.com/ajax/libs/EventEmitter/4.3.0/EventEmitter.min.js)

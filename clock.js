@@ -1,63 +1,31 @@
-var clock = function() {
-
-	var self = this;
-
-	this.colorArray = this.fillColorArray();
-	this.$ticker = $('.ticker');
-	this.$tickerState = true;
-	this.$background = $('.clock-inside');
-	this.$workTime = parseInt($('.work .number').html(), 10);
-	this.$breakTime = parseInt($('.break .number').html(), 10);
-	this.startTime = $workTime * 60;
-	this.timeLeft = startTime;
-	this.ticking = false;
+var clock = (function() {
 	
-	this.start = function() {
-		this.ticking = true;
-		this.tick();
-	}
+	this.prototype = Object.clone(EventEmitter.protoype)
+    
+    var status = false; //false is off, true is on
+    var self = this;
+	var ticker = setInterval(function() {
+		
+		
 
-	this.stop = function() {
-		this.ticking = false;
-	}
-
-	this.fillColorArray = function() {
-		return randomColor({count: 100});
-	}
-
-	this.bgChange = function() {
-		if (this.colorArray.length == 0) {
-			this.colorArray = this.fillColorArray();
+		} , 1000);
+	
+	var start = function () {
+		
+		if (!status) {	//if status is false (= off)
+			status = "on";
+			tick();
 		}
-		var nextColor = this.colorArray.shift();
-		this.$background.css('background-color', nextColor);
-	}	
 
-	this.tick = function() {
-		if (!this.ticking) {
-			return;
-		}
-		if (this.$tickerState) {
-			if (this.$timeLeft > 0) {
-				this.$timeLeft--;
-				this.$ticker.animate({
-					left: "95%"
-				}, 500, bgChange);
-				setTimeOut(self.tick(), 1000);
-			} else {
-				return;
-			}
-		} else {
-			if (this.$timeLeft > 0) {
-				this.$timeLeft--;
-				this.$ticker.animate({
-					left: "0%"
-				}, 500, bgChange);
-				setTimeOut(self.tick(), 1000);
-			} else {
-				return;
-			}
-		} //if/else (this.$tickerstate) (40/50)
-	} //this.tick() (36)
+	}
 
-}
+	var stop = function() {
+		clearInterval(ticker);
+	}
+
+	return {
+		start: start,
+		stop: stop,
+	}
+	
+});

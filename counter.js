@@ -1,4 +1,4 @@
-var counter = (function{
+var counter = (function() {
 	
 	
 });
