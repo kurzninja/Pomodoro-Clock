@@ -2,8 +2,22 @@ var interface = (function() {
 
     var colorArray = fillColorArray();
     var $background = $('.clock-inside');
-    var $minuteCounter = $('')
+    
+    
+    var $workPlusBtn = $('#workPlusBtn');
+    var $workMinusBtn = $('#workMinusBtn');
+    var $workTimeInput = $('#workTimeInput');
+    
+    var $breakPlusBtn = $('#breakPlusBtn');
+    var $breakMinusBtn = $('#breakMinusBtn');
+    var $breakTimeInput = $('#breakTimeInput');
+    
+    
     var $tickerSlider = $('.ticker');
+    var $workLabel = $('#workLabel');
+    var $restLabel = $('#breakLabel');
+    var $timer = $('.timer');
+    var running = false;
     
     function fillColorArray(){
         return randomColor({count: 100});
@@ -42,6 +56,38 @@ var interface = (function() {
         
     }
     
+    $workPlusBtn.on('click', function(){
+        $workTimeInput.val($workTimeInput.val()++);
+    });
     
-    eventTracker.on('counted', );
+    $workMinusBtn.on('click', function(){
+        $workTimeInput.val($workTimeInput.val()--);
+    });
+    $breakPlusBtn.on('click', function(){
+        $breakTimeInput.val($breakTimeInput.val()++);
+    });
+    
+    $breakMinusBtn.on('click', function(){
+        $breakTimeInput.val($breakTimeInput.val()--);
+    });
+    
+    $background.on('click', function(){
+        if (!running) {
+            eventTracker.emit('stop');
+        } else {
+            var initialState = {
+                startTime: $('#workTimeInput').val(),
+                breakTime: $('#breakTimeInput').val()
+            }
+            EventTracker.emit('start', initialState);        
+        }
+    });
+    
+    eventTracker.on('tick', animateTicker);
+    eventTracker.on('counted', function(timeLeft){
+        var minutes = Math.floor(timeLeft / 60).toString();
+        var seconds = (timeLeft % 60).toString();
+        $timer.html(timeLeft);        
+        
+    });
 });
