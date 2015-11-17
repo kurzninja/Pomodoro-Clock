@@ -21,5 +21,6 @@ var clock = function () {
     
     eventTracker.on('start', start);
     eventTracker.on('stop', stop);
+    eventTracker.on('timeup', stop);
     
 };
