@@ -1,31 +1,25 @@
-var clock = (function() {
+var clock = function () {
 	
-	this.prototype = Object.clone(EventEmitter.protoype)
+	var status = false; //false is off, true is on
     
-    var status = false; //false is off, true is on
-    var self = this;
-	var ticker = setInterval(function() {
-		
-		
-
-		} , 1000);
+	var ticker = function() {
+        return setInterval(function() {		
+        eventTracker.emit('tick', null);
+		}, 1000);
+    }
 	
-	var start = function () {
-		
+	var start = function () {		
 		if (!status) {	//if status is false (= off)
 			status = "on";
 			tick();
 		}
-
 	}
 
 	var stop = function() {
 		clearInterval(ticker);
-	}
-
-	return {
-		start: start,
-		stop: stop,
-	}
-	
-});
+	}	
+    
+    eventTracker.on('start', start);
+    eventTracker.on('stop', stop);
+    
+};
