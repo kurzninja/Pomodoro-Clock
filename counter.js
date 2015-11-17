@@ -1,7 +1,7 @@
 var counter = (function() {
     
-    var workTime = parseInt($('.work .number')).html(), 10);
-    var breakTime = parseInt($('.break .number')).html(), 10);
+    var workTime = $('#workTimeInput').val();
+    var breakTime = $('#breakTimeInput').val();
     var startTime = workTime * 60;
     var timeLeft = startTime;
     
