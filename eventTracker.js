@@ -1,4 +1,4 @@
-var eventTracker = {
+var EventTracker = {
   events: {},
   on: function (eventName, fn) {
     this.events[eventName] = this.events[eventName] || [];
@@ -11,7 +11,7 @@ var eventTracker = {
           this.events[eventName].splice(i, 1);
           break;
         }
-      };
+      }
     }
   },
   emit: function (eventName, data) {
