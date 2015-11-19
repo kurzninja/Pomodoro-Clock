@@ -39,7 +39,7 @@ var Interface = function() {
         var move = function(whichWay){
             $tickerSlider.animate({
                 left: whichWay
-            }, 500, bgChange); //changes bgcolor at end of animation
+            }, 500, "easeOutCubic"); //changes bgcolor at end of animation
         }
         return function() {
             //tickerstate false = ticker on left
