@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
+    <link rel="stylesheet" href="./style.css" />
+    
+</head>
+
+<body>
+    <div id="header">
+        <h1>Pomodoro Clock<br/><small>for FreeCodeCamp.com</small></h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <!-- work time label and controls -->
+            <div class="col-xs-12 list-label" id="workLabel">Work Time</div>
+            <div class="col-xs-12 work">
+                <ul class="list-inline">
+                    <li class="fa fa-minus-circle fa-2x button" id="workMinusBtn"></li>
+                    <li class="number">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-inline" value="20" id="workTimeInput"></input>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="fa fa-plus-circle fa-2x button" id="workPlusBtn"></li>
+                </ul>
+            </div>
+
+            <!-- end work time label and controls -->
+
+            <!-- clock ticker -->
+
+            <div class="col-xs-12">
+                <div class="clock">
+                    <div class="clock-inside">
+                        <div class="timer">20:00</div>
+                        <div class="ticker"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end clock ticker -->
+
+            <!-- break time label and controls -->
+
+            <div class="col-xs-12 break">
+                <ul class="list-inline">
+
+                    <li class="fa fa-minus-circle fa-2x button" id="breakMinusBtn"></li>
+                    <li class="number">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-inline" id="breakTimeInput" value=" 5"></input>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="fa fa-plus-circle fa-2x button" id="breakPlusBtn"></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 list-label" id="breakLabel">Break Time</div>
+
+            <!-- break time label and controls -->
+
+        </div>
+        <!-- end row div -->
+    </div>
+    <!-- end container -->
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.0/randomColor.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
+<script src="./clock.js"></script>
+<script src="./counter.js"></script>
+<script src="./interface.js"></script>
+<script src="./eventTracker.js"></script>
+
+<script>
+$('document').ready(function(){
+    var clock = new Clock();
+    var counter = new Counter();
+    var interface = new Interface();
+    
+    interface.changeBGColor();
+    
+    
+    
+});
+
+
+</script>
+</body>
+
+</html>
