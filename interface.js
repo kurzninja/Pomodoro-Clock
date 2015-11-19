@@ -23,7 +23,7 @@ var interface = (function() {
         return randomColor({count: 100});
     }
     
-    function changeBGColor() {
+    this.changeBGColor = function() {
         if (colorArray.length < 1) {
             fillColorArray();
         }
