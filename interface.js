@@ -41,17 +41,21 @@ var Interface = function() {
                 left: whichWay
             }, 500, "easeOutCubic"); //changes bgcolor at end of animation
         }
-        return function() {
+        
             //tickerstate false = ticker on left
             if (!tickerState) { 
-                tickerState = true;
+                tickerState = !tickerState;
+//                console.log("moving right", "tickerstate: " + tickerState);
+                self.changeBGColor();
                 move(right);
             //tickerstate true = ticker on right
             } else {
-                tickerState = false;
+                tickerState = !tickerState;
+//                console.log("moving left", "tickerstate: " + tickerState);
+                self.changeBGColor();
                 move(left);
             } //end if/else
-        } //end return function
+        
     } //end animateTicker() 
     
     function updateMinutes(seconds) {
