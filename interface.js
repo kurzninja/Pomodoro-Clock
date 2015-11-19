@@ -56,19 +56,24 @@ var interface = (function() {
         
     }
     
-    $workPlusBtn.on('click', function(){
-        $workTimeInput.val($workTimeInput.val()++);
+    $workPlusBtn.on('click', function () {
+        if ($workTimeInput.val() < 121)
+            $workTimeInput.val(parseInt($workTimeInput.val(), 10) + 1);
     });
-    
-    $workMinusBtn.on('click', function(){
-        $workTimeInput.val($workTimeInput.val()--);
+
+    $workMinusBtn.on('click', function () {
+        if ($workTimeInput.val() > 1)
+            $workTimeInput.val(parseInt($workTimeInput.val(), 10) - 1);
     });
-    $breakPlusBtn.on('click', function(){
-        $breakTimeInput.val($breakTimeInput.val()++);
+
+    $breakPlusBtn.on('click', function () {
+        if ($breakTimeInput.val() < 61)
+            $breakTimeInput.val(parseInt($breakTimeInput.val(), 10) + 1);
     });
-    
-    $breakMinusBtn.on('click', function(){
-        $breakTimeInput.val($breakTimeInput.val()--);
+
+    $breakMinusBtn.on('click', function () {
+        if ($breakTimeInput.val() > 1)
+            $breakTimeInput.val(parseInt($breakTimeInput.val(), 10) - 1);
     });
     
     $background.on('click', function(){
