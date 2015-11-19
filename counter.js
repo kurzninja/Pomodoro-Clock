@@ -1,21 +1,25 @@
-var counter = (function() {
+var Counter = function() {
     
-    var workTime = $('#workTimeInput').val();
-    var breakTime = $('#breakTimeInput').val();
-    var startTime = workTime * 60;
-    var timeLeft = startTime;
+    
+    var timeLeft = "";
     
     var tick = function() {
+        console.log("counter.tick ticked", "timeLeft: " + timeLeft);
         if (timeLeft > 0) {
             timeLeft--;
-            eventTracker.emit('counted', timeLeft);
+            EventTracker.emit('counted', timeLeft);
         } 
-        else {
-            eventTracker.emit('timeup');
+        else {   
+            console.log("Counter: time's up");
+            EventTracker.emit('timeup');
         }
             
     }
+    
+    EventTracker.on('init', function(initialState){
+        timeLeft = initialState.startTime * 60;        
+    });
 	
-    eventTracker.on('tick', tick);
+    EventTracker.on('tick', tick);
 	
-});
+};
