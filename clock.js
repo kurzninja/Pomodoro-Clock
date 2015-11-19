@@ -5,7 +5,7 @@ var Clock = function () {
     var start = function () {
         ticker = setInterval(function () {
             EventTracker.emit('tick');
-            console.log("ticked \n");
+//            console.log("ticked \n");
         }, 1000);
     }
 
