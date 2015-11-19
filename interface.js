@@ -85,7 +85,7 @@ var Interface = function() {
     $background.on('click', function(){
         
         if (running) {
-            console.log('$background clicked, stopped');
+//            console.log('$background clicked, stopped');
             EventTracker.emit('stop');
             running = false;
         } else {
@@ -94,7 +94,7 @@ var Interface = function() {
                 startTime: parseInt($('#workTimeInput').val()),
                 breakTime: parseInt($('#breakTimeInput').val())
             }
-            console.log('$background click, starting');
+//            console.log('$background click, starting');
             EventTracker.emit('start', initialState); 
             running = true;
         }
@@ -117,7 +117,7 @@ var Interface = function() {
     });
     
     EventTracker.on('tick', function(){
-        console.log("interface.tick handler");
+//        console.log("interface.tick handler");
         animateTicker();
     });
     EventTracker.on('counted', function(timeLeft){
