@@ -94,8 +94,27 @@ var interface = (function() {
         }
     });
     
-    eventTracker.on('tick', animateTicker);
-    eventTracker.on('counted', function(timeLeft){
+    $workTimeInput.focusout(function(){
+       if ($workTimeInput.val() < 1 || /\D/.test($workTimeInput.val())) {
+           $workTimeInput.val(1);
+           alert("Work time must be a number between 1 - 120");           
+           $workTimeInput.focus();
+       }
+    });
+    
+    $breakTimeInput.focusout(function(){
+       if ($breakTimeInput.val() < 1 || /\D/.test($breakTimeInput.val())) {
+           $breakTimeInput.val(1);
+           alert("Break time must be a number between 1 - 120");           
+           $breakTimeInput.focus();
+       }
+    });
+    
+    EventTracker.on('tick', function(){
+        console.log("interface.tick handler");
+        animateTicker();
+    });
+    EventTracker.on('counted', function(timeLeft){
         var minutes = Math.floor(timeLeft / 60).toString();
         var seconds = (timeLeft % 60).toString();
         $timer.html(timeLeft);        
