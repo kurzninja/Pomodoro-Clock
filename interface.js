@@ -77,14 +77,20 @@ var interface = (function() {
     });
     
     $background.on('click', function(){
-        if (!running) {
-            eventTracker.emit('stop');
+        
+        if (running) {
+            console.log('$background clicked, stopped');
+            EventTracker.emit('stop');
+            running = false;
         } else {
+            
             var initialState = {
-                startTime: $('#workTimeInput').val(),
-                breakTime: $('#breakTimeInput').val()
+                startTime: parseInt($('#workTimeInput').val()),
+                breakTime: parseInt($('#breakTimeInput').val())
             }
-            EventTracker.emit('start', initialState);        
+            console.log('$background click, starting');
+            EventTracker.emit('start', initialState); 
+            running = true;
         }
     });
     
