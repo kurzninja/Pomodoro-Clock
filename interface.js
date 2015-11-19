@@ -32,8 +32,8 @@ var Interface = function() {
         $background.css('background-color', colorArray.shift());        
     }
     
-    function animateTicker() {
-        var tickerState = false;
+    var animateTicker= function() {
+        
         var left = "0%";
         var right = "95%";
         var move = function(whichWay){
