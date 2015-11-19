@@ -18,7 +18,9 @@ var Interface = function() {
     var $restLabel = $('#breakLabel');
     var $timer = $('.timer');
     var running = false;
-       
+    
+    var self = this;
+    var tickerState = false;
    function fillColorArray(){
         return randomColor({count: 100});
     }
