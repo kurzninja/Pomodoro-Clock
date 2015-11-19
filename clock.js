@@ -1,26 +1,24 @@
-var clock = function () {
-	
-	var status = false; //false is off, true is on
-    
-	var ticker = function() {
-        return setInterval(function() {		
-        eventTracker.emit('tick', null);
-		}, 1000);
-    }
-	
-	var start = function () {		
-		if (!status) {	//if status is false (= off)
-			status = "on";
-			tick();
-		}
-	}
+var Clock = function () {
 
-	var stop = function() {
-		clearInterval(ticker);
-	}	
-    
-    eventTracker.on('start', start);
-    eventTracker.on('stop', stop);
-    eventTracker.on('timeup', stop);
-    
+    var ticker = "";
+
+    var start = function () {
+        ticker = setInterval(function () {
+            EventTracker.emit('tick');
+            console.log("ticked \n");
+        }, 1000);
+    }
+
+    var stop = function () {
+        console.log("clock.stop stopping");
+        clearInterval(ticker);
+    }
+
+    EventTracker.on('start', function(initialState){
+        EventTracker.emit('init', initialState);
+        start();
+    });
+    EventTracker.on('stop', stop);
+    EventTracker.on('timeup', stop);
+
 };
