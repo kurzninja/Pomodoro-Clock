@@ -1,4 +1,4 @@
-var interface = (function() {
+var Interface = function() {
 
     var colorArray = fillColorArray();
     var $background = $('.clock-inside');
@@ -18,8 +18,8 @@ var interface = (function() {
     var $restLabel = $('#breakLabel');
     var $timer = $('.timer');
     var running = false;
-    
-    function fillColorArray(){
+       
+   function fillColorArray(){
         return randomColor({count: 100});
     }
     
@@ -34,7 +34,7 @@ var interface = (function() {
         var tickerState = false;
         var left = "0%";
         var right = "95%";
-        function move(whichWay){
+        var move = function(whichWay){
             $tickerSlider.animate({
                 left: whichWay
             }, 500, bgChange); //changes bgcolor at end of animation
@@ -120,4 +120,4 @@ var interface = (function() {
         $timer.html(timeLeft);        
         
     });
-});
+};
