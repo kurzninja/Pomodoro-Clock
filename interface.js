@@ -140,6 +140,10 @@ var Interface = function () {
     });
     
     //'counted' handler receives (work or break) time left, and clock mode
+    EventTracker.on('counted', function (timeLeft, mode) {
+        updateModeDisplay(mode);
+        updateTimer(timeLeft);
+    });
     
     $background.on('click', function () {
 
