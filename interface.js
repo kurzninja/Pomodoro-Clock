@@ -9,22 +9,17 @@ var Interface = function () {
 
     // jQuery object of clock for click tracking
     var $background = $('.clock-inside');
-    
-    
 
     // "work" module controls/input
     var $workPlusBtn = $('#workPlusBtn');
     var $workMinusBtn = $('#workMinusBtn');
     var $workTimeInput = $('#workTimeInput');
-    
     var $workLabel = $('#workLabel');
 
     // "break" module controls/input
     var $breakPlusBtn = $('#breakPlusBtn');
     var $breakMinusBtn = $('#breakMinusBtn');
     var $breakTimeInput = $('#breakTimeInput');
-    
-    
     var $breakLabel = $('#breakLabel');
 
     // animated ticker slider
@@ -33,11 +28,10 @@ var Interface = function () {
     // visual countdown timer
     var $timer = $('.timer');
     var running = false;
-    
+
+    // local interface variables    
     var self = this;
     var tickerState = false;
-   function fillColorArray(){
-        return randomColor({count: 100});
 
     //interface methods
 
@@ -137,8 +131,6 @@ var Interface = function () {
     
     //'counted' handler receives (work or break) time left, and clock mode
     
-    $background.on('click', function(){
-        
     $background.on('click', function () {
 
         if (running) {
