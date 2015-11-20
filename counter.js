@@ -1,3 +1,7 @@
+/*
+Counter object constructor that keeps track of how much time is left, when time is up, and which state the Pomodoro clock is in (work or break).
+*/
+
 var Counter = function() {
     
     
