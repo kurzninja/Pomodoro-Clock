@@ -145,6 +145,10 @@ var Interface = function () {
         updateTimer(timeLeft);
     });
     
+    EventTracker.on('timeup', function(){ //resets running mode on timeup event
+        running = false;
+    });
+
     $background.on('click', function () {
 
         if (running) {
