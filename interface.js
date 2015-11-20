@@ -166,3 +166,4 @@ var Interface = function () {
             running = true;
         }
     });
+};
