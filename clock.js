@@ -19,10 +19,7 @@ var Clock = function () {
         clearInterval(ticker);
     }
 
-    EventTracker.on('start', function(initialState){
-        EventTracker.emit('init', initialState);
-        start();
-    });
+    EventTracker.on('start', start);
     EventTracker.on('stop', stop);
     EventTracker.on('timeup', stop);
 
