@@ -89,6 +89,10 @@ var Interface = function () {
         $timer.html(time);
     }
     
+    
+    function updateModeDisplay() {
+        //implement work and break color coding here
+    }
 
     //click handlers for control buttons
     $workPlusBtn.on('click', function () {
