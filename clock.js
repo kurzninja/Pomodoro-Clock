@@ -1,3 +1,8 @@
+/* 
+Clock object constructor that emits "ticks" at one second intervals, responds to "start" and "stop" events appropriately
+*/
+
+
 var Clock = function () {
 
     var ticker = "";
