@@ -1,21 +1,36 @@
-var Interface = function() {
+/*
+Interface object constructor that keeps track of UI elements and handles controls, inputs, and visual rendering of clock state
+*/
 
+var Interface = function () {
+
+    // array of random color values
     var colorArray = fillColorArray();
+
+    // jQuery object of clock for click tracking
     var $background = $('.clock-inside');
     
     
+
+    // "work" module controls/input
     var $workPlusBtn = $('#workPlusBtn');
     var $workMinusBtn = $('#workMinusBtn');
     var $workTimeInput = $('#workTimeInput');
     
+    var $workLabel = $('#workLabel');
+
+    // "break" module controls/input
     var $breakPlusBtn = $('#breakPlusBtn');
     var $breakMinusBtn = $('#breakMinusBtn');
     var $breakTimeInput = $('#breakTimeInput');
     
     
+    var $breakLabel = $('#breakLabel');
+
+    // animated ticker slider
     var $tickerSlider = $('.ticker');
-    var $workLabel = $('#workLabel');
-    var $restLabel = $('#breakLabel');
+
+    // visual countdown timer
     var $timer = $('.timer');
     var running = false;
     
@@ -23,45 +38,59 @@ var Interface = function() {
     var tickerState = false;
    function fillColorArray(){
         return randomColor({count: 100});
+
+    //interface methods
+
+    // fills colorArray with random color values
+    function fillColorArray() {
+        return randomColor({
+            count: 100
+        });
     }
-    
-    this.changeBGColor = function() {
+
+    // changes background color of clock, refills color array if empty
+    this.changeBGColor = function () {
         if (colorArray.length < 1) {
             fillColorArray();
         }
-        $background.css('background-color', colorArray.shift());        
+        $background.css('background-color', colorArray.shift());
     }
-    
-    var animateTicker= function() {
-        
-        var left = "0%";
-        var right = "95%";
-        var move = function(whichWay){
-            $tickerSlider.animate({
-                left: whichWay
-            }, 500, "easeOutCubic"); //changes bgcolor at end of animation
-        }
-        
+
+    //function to animate clock
+    var animateTicker = function () {
+
+            var left = "0%";
+            var right = "95%";
+            var move = function (whichWay) {
+                $tickerSlider.animate({
+                    left: whichWay
+                }, 500, "easeOutCubic"); //changes bgcolor at end of animation
+            }
+
             //tickerstate false = ticker on left
-            if (!tickerState) { 
+            if (!tickerState) {
                 tickerState = !tickerState;
-//                console.log("moving right", "tickerstate: " + tickerState);
+                //                console.log("moving right", "tickerstate: " + tickerState);
                 self.changeBGColor();
                 move(right);
-            //tickerstate true = ticker on right
+                //tickerstate true = ticker on right
             } else {
                 tickerState = !tickerState;
-//                console.log("moving left", "tickerstate: " + tickerState);
+                //                console.log("moving left", "tickerstate: " + tickerState);
                 self.changeBGColor();
                 move(left);
             } //end if/else
-        
-    } //end animateTicker() 
-    
     function updateMinutes(seconds) {
         
+
+        } //end animateTicker() 
+
+
+    //updates .timer clock on each tick
     }
     
+
+    //click handlers for control buttons
     $workPlusBtn.on('click', function () {
         if ($workTimeInput.val() < 121)
             $workTimeInput.val(parseInt($workTimeInput.val(), 10) + 1);
@@ -81,49 +110,49 @@ var Interface = function() {
         if ($breakTimeInput.val() > 1)
             $breakTimeInput.val(parseInt($breakTimeInput.val(), 10) - 1);
     });
+    // end click handlers
+
+    // input validation for keyboard entry of work time
+    $workTimeInput.focusout(function () {
+        if ($workTimeInput.val() < 1 || /\D/.test($workTimeInput.val())) {
+            $workTimeInput.val(1);
+            alert("Work time must be a number between 1 - 120");
+            $workTimeInput.focus();
+        }
+    });
+
+    // input validation for keyboard entry of break time
+    $breakTimeInput.focusout(function () {
+        if ($breakTimeInput.val() < 1 || /\D/.test($breakTimeInput.val())) {
+            $breakTimeInput.val(1);
+            alert("Break time must be a number between 1 - 120");
+            $breakTimeInput.focus();
+        }
+    });
+
+    EventTracker.on('tick', function () {
+        //        console.log("interface.tick handler");
+        animateTicker();
+    });
+    
+    //'counted' handler receives (work or break) time left, and clock mode
     
     $background.on('click', function(){
         
+    $background.on('click', function () {
+
         if (running) {
-//            console.log('$background clicked, stopped');
+            console.log('$background clicked, stopped');
             EventTracker.emit('stop');
             running = false;
         } else {
-            
+
             var initialState = {
-                startTime: parseInt($('#workTimeInput').val()),
-                breakTime: parseInt($('#breakTimeInput').val())
-            }
-//            console.log('$background click, starting');
-            EventTracker.emit('start', initialState); 
+                    startTime: parseInt($('#workTimeInput').val()),
+                    breakTime: parseInt($('#breakTimeInput').val())
+                }
+            console.log('$background click, starting');
+            EventTracker.emit('init', initialState);
             running = true;
         }
     });
-    
-    $workTimeInput.focusout(function(){
-       if ($workTimeInput.val() < 1 || /\D/.test($workTimeInput.val())) {
-           $workTimeInput.val(1);
-           alert("Work time must be a number between 1 - 120");           
-           $workTimeInput.focus();
-       }
-    });
-    
-    $breakTimeInput.focusout(function(){
-       if ($breakTimeInput.val() < 1 || /\D/.test($breakTimeInput.val())) {
-           $breakTimeInput.val(1);
-           alert("Break time must be a number between 1 - 120");           
-           $breakTimeInput.focus();
-       }
-    });
-    
-    EventTracker.on('tick', function(){
-//        console.log("interface.tick handler");
-        animateTicker();
-    });
-    EventTracker.on('counted', function(timeLeft){
-        var minutes = Math.floor(timeLeft / 60).toString();
-        var seconds = (timeLeft % 60).toString();
-        $timer.html(timeLeft);        
-        
-    });
-};
