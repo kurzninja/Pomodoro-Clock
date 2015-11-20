@@ -1,3 +1,7 @@
+/*
+Instantiated Mediator object for handling pub/sub implementation.
+*/
+
 var EventTracker = {
   events: {},
   on: function (eventName, fn) {
