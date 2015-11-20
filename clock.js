@@ -15,7 +15,7 @@ var Clock = function () {
     }
 
     var stop = function () {
-        console.log("clock.stop stopping");
+//        console.log("clock.stop stopping");
         clearInterval(ticker);
     }
 
