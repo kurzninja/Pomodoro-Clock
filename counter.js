@@ -5,7 +5,9 @@ Counter object constructor that keeps track of how much time is left, when time 
 var Counter = function() {
     
     
-    var timeLeft = "";
+    var workTimeLeft = "";
+    var breakTimeLeft = "";
+    var mode = true; //true = work, false = break;
     
     var tick = function() {
 //        console.log("counter.tick ticked", "timeLeft: " + timeLeft);
