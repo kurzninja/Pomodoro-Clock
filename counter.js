@@ -28,14 +28,14 @@ var Counter = function() {
             else { // break mode time runs out
                 mode = true;
                 EventTracker.emit('timeup');
-            }
-            
-        }
-            
+            }            
+        }            
     }
     
     EventTracker.on('init', function(initialState){
-        timeLeft = initialState.startTime * 60;        
+        workTimeLeft = initialState.startTime * 60;        
+        breakTimeLeft = initialState.breakTime * 60;
+        EventTracker.emit('start');
     });
 	
     EventTracker.on('tick', tick);
