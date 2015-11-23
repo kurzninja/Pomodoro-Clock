@@ -80,12 +80,11 @@ var Interface = function () {
 
     //updates .timer clock on each tick
     function updateTimer(seconds) {
-        var time = "";
         var minutes = Math.floor(seconds / 60);
         var seconds = seconds % 60;
 
         // zero pads minutes and seconds if < 10
-        time = ((minutes < 10) ? "0" + minutes : minutes) + ":" + ((seconds < 10) ? "0" + seconds : seconds);
+        var time = ((minutes < 10) ? "0" + minutes : minutes) + ":" + ((seconds < 10) ? "0" + seconds : seconds);
         $timer.html(time);
     }
     
@@ -96,22 +95,22 @@ var Interface = function () {
 
     //click handlers for control buttons
     $workPlusBtn.on('click', function () {
-        if ($workTimeInput.val() < 121)
+        if ($workTimeInput.val() < 121 && !running)
             $workTimeInput.val(parseInt($workTimeInput.val(), 10) + 1);
     });
 
     $workMinusBtn.on('click', function () {
-        if ($workTimeInput.val() > 1)
+        if ($workTimeInput.val() > 1 && !running)
             $workTimeInput.val(parseInt($workTimeInput.val(), 10) - 1);
     });
 
     $breakPlusBtn.on('click', function () {
-        if ($breakTimeInput.val() < 61)
+        if ($breakTimeInput.val() < 61 && !running)
             $breakTimeInput.val(parseInt($breakTimeInput.val(), 10) + 1);
     });
 
     $breakMinusBtn.on('click', function () {
-        if ($breakTimeInput.val() > 1)
+        if ($breakTimeInput.val() > 1 && !running)
             $breakTimeInput.val(parseInt($breakTimeInput.val(), 10) - 1);
     });
     // end click handlers
@@ -148,6 +147,11 @@ var Interface = function () {
     EventTracker.on('timeup', function(){ //resets running mode on timeup event
         running = false;
     });
+    
+    EventTracker.on('started', function(initialTime){
+        updateTimer(initialTime);
+        $timer.css({"visibility": "visible"});
+    });
 
     $background.on('click', function () {
 
@@ -155,6 +159,7 @@ var Interface = function () {
             console.log('$background clicked, stopped');
             EventTracker.emit('stop');
             running = false;
+            $timer.css({"visibility": "hidden"});
         } else {
 
             var initialState = {
@@ -164,6 +169,7 @@ var Interface = function () {
             console.log('$background click, starting');
             EventTracker.emit('init', initialState);
             running = true;
+            
         }
     });
 };

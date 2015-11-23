@@ -64,6 +64,7 @@ input {
 		margin-right: auto;
 		box-shadow: 5px 5px 10px black;
 		padding: 5px;
+        cursor: pointer;
 }
 
 .clock-inside {
@@ -74,6 +75,7 @@ input {
 }
 
 .timer {
+        visibility: hidden;
 		position: absolute;
 		height: 100%;
 		width: 100%;
@@ -96,7 +98,7 @@ input {
 }
 
 .container {
-		margin-top: 50px;
+		margin-top: 25px;        
 }
 
 .list-label {
