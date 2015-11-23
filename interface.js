@@ -95,22 +95,22 @@ var Interface = function () {
 
     //click handlers for control buttons
     $workPlusBtn.on('click', function () {
-        if ($workTimeInput.val() < 121)
+        if ($workTimeInput.val() < 121 && !running)
             $workTimeInput.val(parseInt($workTimeInput.val(), 10) + 1);
     });
 
     $workMinusBtn.on('click', function () {
-        if ($workTimeInput.val() > 1)
+        if ($workTimeInput.val() > 1 && !running)
             $workTimeInput.val(parseInt($workTimeInput.val(), 10) - 1);
     });
 
     $breakPlusBtn.on('click', function () {
-        if ($breakTimeInput.val() < 61)
+        if ($breakTimeInput.val() < 61 && !running)
             $breakTimeInput.val(parseInt($breakTimeInput.val(), 10) + 1);
     });
 
     $breakMinusBtn.on('click', function () {
-        if ($breakTimeInput.val() > 1)
+        if ($breakTimeInput.val() > 1 && !running)
             $breakTimeInput.val(parseInt($breakTimeInput.val(), 10) - 1);
     });
     // end click handlers
