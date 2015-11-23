@@ -35,7 +35,7 @@ var Counter = function() {
     EventTracker.on('init', function(initialState){
         workTimeLeft = initialState.startTime * 60;        
         breakTimeLeft = initialState.breakTime * 60;
-        EventTracker.emit('start');
+        EventTracker.emit('start', workTimeLeft);
     });
 	
     EventTracker.on('tick', tick);
