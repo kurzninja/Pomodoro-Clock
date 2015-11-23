@@ -7,15 +7,16 @@ var Clock = function () {
 
     var ticker = "";
 
-    var start = function () {
+    function start(initialTime) {
+        EventTracker.emit('started', initialTime);
         ticker = setInterval(function () {
             EventTracker.emit('tick');
-//            console.log("ticked \n");
+            //            console.log("ticked \n");
         }, 1000);
-    }
+    };
 
-    var stop = function () {
-//        console.log("clock.stop stopping");
+    function stop() {
+        //        console.log("clock.stop stopping");
         clearInterval(ticker);
     }
 
