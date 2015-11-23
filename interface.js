@@ -80,12 +80,11 @@ var Interface = function () {
 
     //updates .timer clock on each tick
     function updateTimer(seconds) {
-        var time = "";
         var minutes = Math.floor(seconds / 60);
         var seconds = seconds % 60;
 
         // zero pads minutes and seconds if < 10
-        time = ((minutes < 10) ? "0" + minutes : minutes) + ":" + ((seconds < 10) ? "0" + seconds : seconds);
+        var time = ((minutes < 10) ? "0" + minutes : minutes) + ":" + ((seconds < 10) ? "0" + seconds : seconds);
         $timer.html(time);
     }
     
