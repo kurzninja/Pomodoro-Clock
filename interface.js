@@ -159,6 +159,7 @@ var Interface = function () {
             console.log('$background clicked, stopped');
             EventTracker.emit('stop');
             running = false;
+            $timer.css({"visibility": "hidden"});
         } else {
 
             var initialState = {
@@ -168,6 +169,7 @@ var Interface = function () {
             console.log('$background click, starting');
             EventTracker.emit('init', initialState);
             running = true;
+            
         }
     });
 };
