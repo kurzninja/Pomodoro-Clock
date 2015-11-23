@@ -147,6 +147,11 @@ var Interface = function () {
     EventTracker.on('timeup', function(){ //resets running mode on timeup event
         running = false;
     });
+    
+    EventTracker.on('started', function(initialTime){
+        updateTimer(initialTime);
+        $timer.css({"visibility": "visible"});
+    });
 
     $background.on('click', function () {
 
