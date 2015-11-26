@@ -134,7 +134,22 @@ var Interface = function () {
             $breakTimeInput.focus();
         }
     });
-
+    
+    // disable buttons during running state
+    function disableButtons(){
+        $workPlusBtn.addClass('disabled');
+        $workMinusBtn.addClass('disabled');
+        $breakPlusBtn.addClass('disabled');
+        $breakMinusBtn.addClass('disabled');
+    }
+    
+    function enableButtons(){
+        $workPlusBtn.removeClass('disabled');
+        $workMinusBtn.removeClass('disabled');
+        $breakPlusBtn.removeClass('disabled');
+        $breakMinusBtn.removeClass('disabled');
+    }
+    
     EventTracker.on('tick', function () {
         //        console.log("interface.tick handler");
         animateTicker();
@@ -162,6 +177,7 @@ var Interface = function () {
             EventTracker.emit('stop');
             running = false;
             $timer.css({"visibility": "hidden"});
+            enableButtons();
         } else {
 
             var initialState = {
@@ -171,7 +187,7 @@ var Interface = function () {
             console.log('$background click, starting');
             EventTracker.emit('init', initialState);
             running = true;
-            
+            disableButtons();            
         }
     });
 };
