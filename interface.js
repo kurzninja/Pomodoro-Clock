@@ -95,7 +95,7 @@ var Interface = function () {
 
     //click handlers for control buttons
     $workPlusBtn.on('click', function () {
-        if ($workTimeInput.val() < 121 && !running)
+        if ($workTimeInput.val() < 120 && !running)
             $workTimeInput.val(parseInt($workTimeInput.val(), 10) + 1);
     });
 
@@ -105,7 +105,7 @@ var Interface = function () {
     });
 
     $breakPlusBtn.on('click', function () {
-        if ($breakTimeInput.val() < 61 && !running)
+        if ($breakTimeInput.val() < 60 && !running)
             $breakTimeInput.val(parseInt($breakTimeInput.val(), 10) + 1);
     });
 
@@ -117,7 +117,8 @@ var Interface = function () {
 
     // input validation for keyboard entry of work time
     $workTimeInput.focusout(function () {
-        if ($workTimeInput.val() < 1 || /\D/.test($workTimeInput.val())) {
+        var workVal = $workTimeInput.val();
+        if (workVal < 1 || workVal > 120 || /\D/.test(workVal)) {
             $workTimeInput.val(1);
             alert("Work time must be a number between 1 - 120");
             $workTimeInput.focus();
@@ -126,13 +127,29 @@ var Interface = function () {
 
     // input validation for keyboard entry of break time
     $breakTimeInput.focusout(function () {
-        if ($breakTimeInput.val() < 1 || /\D/.test($breakTimeInput.val())) {
+        var breakVal = $breakTimeInput.val();
+        if (breakVal < 1 || breakVal > 60 || /\D/.test(breakVal)) {
             $breakTimeInput.val(1);
-            alert("Break time must be a number between 1 - 120");
+            alert("Break time must be a number between 1 - 60");
             $breakTimeInput.focus();
         }
     });
-
+    
+    // disable buttons during running state
+    function disableButtons(){
+        $workPlusBtn.addClass('disabled');
+        $workMinusBtn.addClass('disabled');
+        $breakPlusBtn.addClass('disabled');
+        $breakMinusBtn.addClass('disabled');
+    }
+    
+    function enableButtons(){
+        $workPlusBtn.removeClass('disabled');
+        $workMinusBtn.removeClass('disabled');
+        $breakPlusBtn.removeClass('disabled');
+        $breakMinusBtn.removeClass('disabled');
+    }
+    
     EventTracker.on('tick', function () {
         //        console.log("interface.tick handler");
         animateTicker();
@@ -160,6 +177,7 @@ var Interface = function () {
             EventTracker.emit('stop');
             running = false;
             $timer.css({"visibility": "hidden"});
+            enableButtons();
         } else {
 
             var initialState = {
@@ -169,7 +187,7 @@ var Interface = function () {
             console.log('$background click, starting');
             EventTracker.emit('init', initialState);
             running = true;
-            
+            disableButtons();            
         }
     });
 };
