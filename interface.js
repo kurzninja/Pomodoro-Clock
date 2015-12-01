@@ -87,15 +87,22 @@ var Interface = function () {
         var time = ((minutes < 10) ? "0" + minutes : minutes) + ":" + ((seconds < 10) ? "0" + seconds : seconds);
         $timer.html(time);
     }
-    
-    function updateModeDisplay() {
-        //implement work and break color coding here
 
     function resetModeDisplay() {
       $workLabel.css("background-color", "#FFF");
       $breakLabel.css("background-color", "#FFF");
     }
 
+    function updateModeDisplay(mode) {
+      //console.log(mode);
+      //mode: true = work, false = break;
+        if (mode) {
+          $workLabel.css("background-color", "#3F3");
+          $breakLabel.css("background-color", "#FFF");
+        } else {
+          $workLabel.css("background-color", "#FFF");
+          $breakLabel.css("background-color", "#3F3");
+        }
     }
 
     //click handlers for control buttons
