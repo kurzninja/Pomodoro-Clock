@@ -146,7 +146,7 @@ var Interface = function () {
             $breakTimeInput.focus();
         }
     });
-    
+
     // disable buttons during running state
     function disableButtons(){
         $workPlusBtn.addClass('disabled');
@@ -154,29 +154,30 @@ var Interface = function () {
         $breakPlusBtn.addClass('disabled');
         $breakMinusBtn.addClass('disabled');
     }
-    
+
     function enableButtons(){
         $workPlusBtn.removeClass('disabled');
         $workMinusBtn.removeClass('disabled');
         $breakPlusBtn.removeClass('disabled');
         $breakMinusBtn.removeClass('disabled');
     }
-    
+
     EventTracker.on('tick', function () {
         //        console.log("interface.tick handler");
         animateTicker();
     });
-    
+
     //'counted' handler receives (work or break) time left, and clock mode
-    EventTracker.on('counted', function (timeLeft, mode) {
-        updateModeDisplay(mode);
-        updateTimer(timeLeft);
+    EventTracker.on('counted', function (data) {
+      //data.mode: true = work, false = break;
+        updateModeDisplay(data.mode);
+        updateTimer(data.timeLeft);
     });
-    
+
     EventTracker.on('timeup', function(){ //resets running mode on timeup event
         running = false;
     });
-    
+
     EventTracker.on('started', function(initialTime){
         updateTimer(initialTime);
 
@@ -190,6 +191,7 @@ var Interface = function () {
             running = false;
             $timer.html("Click here to start");
             enableButtons();
+            resetModeDisplay();
         } else {
 
             var initialState = {
@@ -199,7 +201,8 @@ var Interface = function () {
             console.log('$background click, starting');
             EventTracker.emit('init', initialState);
             running = true;
-            disableButtons();            
+            disableButtons();
+            updateModeDisplay(running);
         }
     });
 };
