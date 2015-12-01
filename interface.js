@@ -179,7 +179,7 @@ var Interface = function () {
     
     EventTracker.on('started', function(initialTime){
         updateTimer(initialTime);
-        $timer.css({"visibility": "visible"});
+
     });
 
     $background.on('click', function () {
@@ -188,7 +188,7 @@ var Interface = function () {
             console.log('$background clicked, stopped');
             EventTracker.emit('stop');
             running = false;
-            $timer.css({"visibility": "hidden"});
+            $timer.html("Click here to start");
             enableButtons();
         } else {
 
