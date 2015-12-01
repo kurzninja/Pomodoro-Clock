@@ -24,6 +24,8 @@ li {
 		width: 100px;
 }
 
+#workLabel {
+	margin-bottom: 40px;
 }
 
 button {
@@ -32,7 +34,7 @@ button {
 		margin-right: auto;
         width: 40px;
         height: 40px;
-        border-radius: 50% !important;  
+        border-radius: 50% !important;
         box-shadow: 2px 2px 1px black;
 }
 
@@ -100,7 +102,7 @@ input {
 }
 
 .container {
-		margin-top: 25px;        
+		margin-top: 25px;
 }
 
 .list-label {
