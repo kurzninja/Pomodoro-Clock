@@ -29,7 +29,7 @@ var Interface = function () {
     var $timer = $('.timer');
     var running = false;
 
-    // local interface variables    
+    // local interface variables
     var self = this;
     var tickerState = false;
 
@@ -75,7 +75,7 @@ var Interface = function () {
                 move(left);
             } //end if/else
 
-        } //end animateTicker() 
+        } //end animateTicker()
 
 
     //updates .timer clock on each tick
@@ -88,9 +88,14 @@ var Interface = function () {
         $timer.html(time);
     }
     
-    
     function updateModeDisplay() {
         //implement work and break color coding here
+
+    function resetModeDisplay() {
+      $workLabel.css("background-color", "#FFF");
+      $breakLabel.css("background-color", "#FFF");
+    }
+
     }
 
     //click handlers for control buttons
