@@ -13,7 +13,7 @@ body {
 }
 
 ul {
-		list-style: disc inside !important;
+		list-style: none inside !important;
 		margin-left: auto;
 		margin-right: auto;
 		text-align: center;
@@ -29,6 +29,12 @@ li {
 }
 
 button {
+    width: 40px;
+    height: 40px;
+}
+
+/*
+button {
 		display: box;
 		margin-left: auto;
 		margin-right: auto;
@@ -37,20 +43,23 @@ button {
         border-radius: 50% !important;
         box-shadow: 2px 2px 1px black;
 }
+*/
 
 button:focus {
     outline: 0 !important;
 }
 
+/*
 button:active {
 		box-shadow: 1px 1px 1px black !important;
 }
+*/
 
 input {
 		border: none;
 		width: 50px;
 		text-align: center;
-		font-family: "Yanone Kaffeesatz";
+/*		font-family: "Yanone Kaffeesatz";*/
 }
 
 .number {
@@ -83,7 +92,7 @@ input {
 		position: absolute;
 		height: 100%;
 		width: 100%;
-		font-family: "Yanone Kaffeesatz";
+/*		font-family: "Yanone Kaffeesatz";*/
 		font-size: 3em;
 		line-height: 1.2em;
 		z-index: 10;
